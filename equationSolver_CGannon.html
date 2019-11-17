@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Java Project</title>
+        <meta charset="UTF-8"> 
+
+        <style>
+        /*CSS styles here*/
+            body {
+	            background: linear-gradient(to left, #FE0000 0%,#01C4FF 100%);
+                color: rgb(228, 225, 225);
+                font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            }
+            h1 {
+                text-align: center;
+                color:#1E202B;
+                font-size: 45px;
+                
+            }
+            #forms {
+                position: relative;
+                box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+                padding: 10px;
+                background: white;
+                margin: auto;
+                text-align: center;
+                width: 40%;
+                background-color: #1E202B;
+                font-size: 30px;
+            }
+
+            input {
+                height: 30px;
+                width: 200px;
+            }
+
+            button {
+                width: 150px;
+                height: 30px;
+                font-size: 20px;
+                border-radius: 10px;
+                color: white;
+                background-color:#1E202B;
+            }
+
+            button:hover {
+                color: darkblue;
+                background-color: white;
+            }
+			
+			#answer-block {
+				display: inline;
+			}
+            
+        </style>
+    </head>
+    <body>
+        <h1>Math Practice</h1>
+        <div id ="forms">
+            <p>Answer the following distribution equations. Distribute the outside integer into the the integers in 
+                the parentheses and solve.
+            </p>
+            <br>
+			<div id="answer-block"> 
+				<p>Correct Answers: <span id="correct"></span></p>
+			</div>
+			
+			<div id="answer-block"> 
+				<p>Incorrect Answers: <span id="incorrect"></span></p>
+			</div>
+            
+        </div>
+
+        <br>
+
+        <div id="forms">
+            <h2>Question:</h2>
+			<h3 id="question"></h3> <!--Display random problem here-->
+            <input type="text" name="solve" id="solve">
+            <br><br>
+            <button id="submit" onclick="buttonClicked()">Submit Answer</button> 
+            <p id="answer"></p>
+            <button value="Reset" onClick="window.location.reload()">Reset</button>
+        </div>
+
+		<script>
+            //sets global count variables 
+            let correct = 0;
+            let incorrect = 0;
+			
+			// Generates a random number in the range
+			function randomNumber(start, end) {
+				var diff = (end - start) + 1;
+				return Math.floor((Math.random() * diff) + start);
+			}
+			
+			let problem1num1 = randomNumber(1, 10);
+			let problem1num2 = randomNumber(1, 10);
+            let problem1num3 = randomNumber(1, 10);
+			let ans = (problem1num1 * problem1num2) + (problem1num1 * problem1num3);
+			
+			
+			// Use this function to handle what happens when the button is clicked
+			function buttonClicked() {
+				if(ans == document.getElementById('solve').value) {
+					document.getElementById('answer').innerHTML = "correct";
+					correct++;
+					updateCorrect();
+					newNums();
+					updateAns();
+					displayNums();
+				} else {
+					document.getElementById('answer').innerHTML = "incorrect";
+					incorrect++;
+					updateInCorrect();
+				}
+			}	
+			
+			function newNums() {
+				problem1num1 = randomNumber(1, 10);
+				problem1num2 = randomNumber(1, 10);
+                problem1num3 = randomNumber(1, 10);
+			}
+			
+			function updateCorrect() {
+				document.getElementById("correct").innerHTML = correct;
+			}
+			
+			function updateInCorrect() {
+				document.getElementById("incorrect").innerHTML = incorrect;
+			}
+			
+			function updateAns() {
+				ans = (problem1num1 * problem1num2) + (problem1num1 * problem1num3);
+			}
+			function displayNums() {
+				document.getElementById("question").innerHTML = problem1num1 + " ( " + problem1num2 + "+" + problem1num3 + ")";
+			}
+
+            
+			
+			// Initialize the count variables
+			document.getElementById("correct").innerHTML = correct;
+			document.getElementById("incorrect").innerHTML = incorrect;
+			displayNums();
+
+        </script>
+
+    </body>
+
+</html>
